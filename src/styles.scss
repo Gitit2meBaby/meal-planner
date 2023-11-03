@@ -1,0 +1,391 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    padding: 2rem 3rem;
+    @extend %column;
+}
+
+//VARIABLES
+$black: rgb(16, 2, 2);
+$off-white: #eeeeee;
+$blue: #6684BE;
+$red: #DB737E;
+
+// MIXINS 
+%column {
+    display: flex;
+    flex-direction: column;
+}
+
+%aligned {
+    display: flex;
+    align-items: center;
+}
+
+%centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+%between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+%border {
+    border: 2px solid $black;
+    border-radius: 2rem;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 25% 1fr;
+}
+
+// SIDEBAR
+aside {
+    @extend %column;
+    background-color: $black;
+    color: $off-white;
+    height: 100dvh;
+    padding-top: 2rem;
+
+    .logo-container,
+    img {
+        max-width: 150px;
+        align-self: center;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a:-webkit-any-link {
+        color: $off-white;
+    }
+
+    a:active {
+        color: $red;
+    }
+
+    li {
+        @extend %aligned;
+        list-style: none;
+        font-size: 1.4rem;
+        padding-bottom: 1.4rem;
+
+        svg {
+            margin-right: 1rem;
+            fill: $blue;
+            stroke: $blue;
+        }
+
+        svg path {
+            fill: $blue;
+            stroke: $black;
+        }
+    }
+
+    li:hover {
+        color: $red;
+    }
+}
+
+// HEAD SECTION
+header {
+    @extend %between;
+}
+
+.header-fields {
+    @extend %aligned;
+    gap: 1rem;
+
+    #randomBtn {
+        border: none;
+        background-color: $blue;
+        border-radius: 2rem;
+        padding: .6rem 1.5rem;
+        color: $off-white;
+        font-size: 1rem;
+        @extend %aligned;
+        gap: .5rem;
+    }
+
+    #randomBtn:hover {
+        background-color: $red;
+    }
+}
+
+.search-input {
+    @extend %aligned;
+    @extend %border;
+    padding: 0.3rem;
+    gap: .5rem;
+    width: 25vw;
+
+    button {
+        border: none;
+        border-radius: 50%;
+        background-color: $red;
+        height: 35px;
+        width: 35px;
+        @extend %centered;
+    }
+
+    input {
+        border: none;
+        outline: none;
+        font-size: 1rem;
+    }
+}
+
+// DASHBOARD 
+.dashboard {
+    display: grid;
+    grid-template-columns: 60% 1fr;
+    gap: 1rem;
+}
+
+.title {
+    grid-column: span 2;
+
+    h1 {
+        margin: 0;
+        padding-top: 1rem;
+        font-size: 1.2rem;
+    }
+}
+
+h2 {
+    margin: 0;
+}
+
+// SCROLLBARS
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 1.4rem 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $red;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $blue;
+}
+
+// RECIPE TITLES CONTAINER
+.matches {
+    @extend %border;
+    padding: 1rem;
+    max-height: 45vh;
+    overflow-y: scroll;
+    grid-row: span 2;
+
+    h2 {
+        color: $red;
+    }
+
+    button {
+        border: none;
+        background-color: $blue;
+        border-radius: 1rem;
+        padding: .5rem 1rem;
+        color: $off-white;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: $red;
+    }
+}
+
+.recipe-titles {
+    @extend %between;
+}
+
+//INGREDIENTS CONTAINER
+.ingredients {
+    @extend %border;
+    padding: 1rem;
+    background-color: $blue;
+    color: $off-white;
+    max-height: 40dvh;
+    overflow-y: scroll;
+
+    p {
+        line-height: 1.4rem;
+    }
+}
+
+// SLIDER (SERVINGS)
+/* Remove the default styles */
+.servings {
+    @extend %column;
+    align-items: center;
+
+    p {
+        margin: 0;
+        font-weight: 800;
+    }
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 90%;
+    height: 15px;
+    background: $red;
+    @extend %border;
+    outline: none;
+}
+
+/* Style the slider thumb/handle */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: $blue;
+    @extend %border;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Set the thumb color when it's being dragged */
+input[type="range"]:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+    transition: all .5s ease-in-out;
+}
+
+
+// INSTRUCTIONS CONTAINER
+.instructions {
+    @extend %border;
+    padding: 1rem;
+    background-color: $red;
+    max-height: 30dvh;
+    overflow-y: scroll;
+
+    p {
+        line-height: 1.4rem;
+    }
+
+}
+
+.instructions::-webkit-scrollbar-thumb {
+    background: $blue;
+    border-radius: 6px;
+}
+
+// CHOOSE CONTAINER
+.choose {
+    @extend %border;
+    padding: 1rem;
+
+    button {
+        border: none;
+        background-color: $blue;
+        border-radius: 1rem;
+        padding: .5rem 1rem;
+        color: $off-white;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: $red;
+    }
+
+    .btn-grid {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        padding-top: 1rem;
+    }
+}
+
+//
+// SHOPPING LIST PAGE
+//
+
+.shopping-list-page {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    gap: 2rem;
+}
+
+.shopping-list-title {
+    @extend %border;
+    background-color: $red;
+    width: fit-content;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+
+    h1 {
+        margin: 0;
+        color: $off-white;
+    }
+}
+
+.list {
+    position: relative;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 1rem;
+
+    button {
+        position: absolute;
+        top: -.3rem;
+        right: -.5rem;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        svg {
+            fill: $red;
+        }
+    }
+
+    p {
+        margin: 0;
+        padding: 0.5rem .5rem 1rem .8rem;
+        cursor: pointer;
+    }
+}
+
+.shopping-list,
+.chosen-list {
+    @extend %border;
+    padding: 1.5rem 1rem;
+    max-height: 80dvh;
+    overflow-y: scroll;
+}
+
+.chosen-list {
+    h2:first-of-type {
+        font-size: 1rem;
+        color: $red;
+        padding-bottom: 0.8rem;
+    }
+
+    h2:nth-of-type(2) {
+        font-size: 1.2rem;
+    }
+}

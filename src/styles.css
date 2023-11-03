@@ -1,0 +1,317 @@
+* {
+  box-sizing: border-box;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  padding: 2rem 3rem;
+}
+
+.servings, aside, .container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-input, .header-fields #randomBtn, .header-fields, aside li {
+  display: flex;
+  align-items: center;
+}
+
+.search-input button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-titles, header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shopping-list,
+.chosen-list, .shopping-list-title, .choose, .instructions, input[type=range]::-webkit-slider-thumb, input[type=range], .ingredients, .matches, .search-input {
+  border: 2px solid rgb(16, 2, 2);
+  border-radius: 2rem;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 25% 1fr;
+}
+
+aside {
+  background-color: rgb(16, 2, 2);
+  color: #eeeeee;
+  height: 100dvh;
+  padding-top: 2rem;
+}
+aside .logo-container,
+aside img {
+  max-width: 150px;
+  align-self: center;
+}
+aside a {
+  text-decoration: none;
+}
+aside a:-webkit-any-link {
+  color: #eeeeee;
+}
+aside a:active {
+  color: #DB737E;
+}
+aside li {
+  list-style: none;
+  font-size: 1.4rem;
+  padding-bottom: 1.4rem;
+}
+aside li svg {
+  margin-right: 1rem;
+  fill: #6684BE;
+  stroke: #6684BE;
+}
+aside li svg path {
+  fill: #6684BE;
+  stroke: rgb(16, 2, 2);
+}
+aside li:hover {
+  color: #DB737E;
+}
+
+.header-fields {
+  gap: 1rem;
+}
+.header-fields #randomBtn {
+  border: none;
+  background-color: #6684BE;
+  border-radius: 2rem;
+  padding: 0.6rem 1.5rem;
+  color: #eeeeee;
+  font-size: 1rem;
+  gap: 0.5rem;
+}
+.header-fields #randomBtn:hover {
+  background-color: #DB737E;
+}
+
+.search-input {
+  padding: 0.3rem;
+  gap: 0.5rem;
+  width: 25vw;
+}
+.search-input button {
+  border: none;
+  border-radius: 50%;
+  background-color: #DB737E;
+  height: 35px;
+  width: 35px;
+}
+.search-input input {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 60% 1fr;
+  gap: 1rem;
+}
+
+.title {
+  grid-column: span 2;
+}
+.title h1 {
+  margin: 0;
+  padding-top: 1rem;
+  font-size: 1.2rem;
+}
+
+h2 {
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 1.4rem 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DB737E;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6684BE;
+}
+
+.matches {
+  padding: 1rem;
+  max-height: 45vh;
+  overflow-y: scroll;
+  grid-row: span 2;
+}
+.matches h2 {
+  color: #DB737E;
+}
+.matches button {
+  border: none;
+  background-color: #6684BE;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  color: #eeeeee;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.matches button:hover {
+  background-color: #DB737E;
+}
+
+.ingredients {
+  padding: 1rem;
+  background-color: #6684BE;
+  color: #eeeeee;
+  max-height: 40dvh;
+  overflow-y: scroll;
+}
+.ingredients p {
+  line-height: 1.4rem;
+}
+
+/* Remove the default styles */
+.servings {
+  align-items: center;
+}
+.servings p {
+  margin: 0;
+  font-weight: 800;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  width: 90%;
+  height: 15px;
+  background: #DB737E;
+  outline: none;
+}
+
+/* Style the slider thumb/handle */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #6684BE;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Set the thumb color when it's being dragged */
+input[type=range]:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.instructions {
+  padding: 1rem;
+  background-color: #DB737E;
+  max-height: 30dvh;
+  overflow-y: scroll;
+}
+.instructions p {
+  line-height: 1.4rem;
+}
+
+.instructions::-webkit-scrollbar-thumb {
+  background: #6684BE;
+  border-radius: 6px;
+}
+
+.choose {
+  padding: 1rem;
+}
+.choose button {
+  border: none;
+  background-color: #6684BE;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  color: #eeeeee;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.choose button:hover {
+  background-color: #DB737E;
+}
+.choose .btn-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+}
+
+.shopping-list-page {
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  gap: 2rem;
+}
+
+.shopping-list-title {
+  background-color: #DB737E;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+}
+.shopping-list-title h1 {
+  margin: 0;
+  color: #eeeeee;
+}
+
+.list {
+  position: relative;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 1rem;
+}
+.list button {
+  position: absolute;
+  top: -0.3rem;
+  right: -0.5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.list button:hover svg {
+  fill: #DB737E;
+}
+.list p {
+  margin: 0;
+  padding: 0.5rem 0.5rem 1rem 0.8rem;
+  cursor: pointer;
+}
+
+.shopping-list,
+.chosen-list {
+  padding: 1.5rem 1rem;
+  max-height: 80dvh;
+  overflow-y: scroll;
+}
+
+.chosen-list h2:first-of-type {
+  font-size: 1rem;
+  color: #DB737E;
+  padding-bottom: 0.8rem;
+}
+.chosen-list h2:nth-of-type(2) {
+  font-size: 1.2rem;
+}/*# sourceMappingURL=styles.css.map */
