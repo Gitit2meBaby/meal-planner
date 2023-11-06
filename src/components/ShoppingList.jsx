@@ -38,6 +38,7 @@ export const ShoppingList = () => {
         setCombinedIngredients(combinedIngredients)
     }, [monday, tuesday, thursday, friday, saturday, sunday]);
 
+    // ...
     function combineIngredients(ingredientLists) {
         // Create an object to store the combined ingredients
         const combinedIngredients = {};
@@ -49,16 +50,15 @@ export const ShoppingList = () => {
             // Process each ingredient item
             ingredientItems.forEach((item) => {
                 // Use a regular expression to extract quantity and description
-                const match = item.match(/^(\d+(\s*\d*\/\d*)?)\s*(.+)/);
+                const match = item.match(/([\d/]+|[\d.]+)\s*([a-zA-Z].*)/);
 
                 if (match) {
                     const quantity = evaluate(match[1]); // Use mathjs to evaluate fractions
-                    const description = match[3];
+                    const description = match[2];
 
                     if (!isNaN(quantity) && description) {
                         // Remove leading/trailing spaces and punctuation
-                        const cleanedDescription = description.replace(/[^a-zA-Z\s]/g, '');
-                        // const cleanedItem = `${quantity} ${cleanedDescription}`;
+                        const cleanedDescription = description.trim().replace(/[^a-zA-Z\s]/g, '');
 
                         // Check if the item already exists in the combinedIngredients
                         if (combinedIngredients[cleanedDescription]) {
@@ -74,13 +74,12 @@ export const ShoppingList = () => {
         });
 
         // Create the final combined ingredient list
-        const finalIngredients = Object.keys(combinedIngredients).map(
+        const formattedList = Object.keys(combinedIngredients).map(
             (key) => `${combinedIngredients[key]} ${key}`
-        );
+        ).join('\n'); // Join the lines with line breaks
 
-        return finalIngredients;
+        return formattedList;
     }
-
 
     // Toggle the state for the clicked day to show more
     const handleShowMore = (day) => {
@@ -88,6 +87,10 @@ export const ShoppingList = () => {
             ...prevShowIngredients,
             [day]: !prevShowIngredients[day],
         }));
+    }
+
+    const handleRemove = () => {
+
     }
 
     // Function to render a day template
@@ -100,7 +103,7 @@ export const ShoppingList = () => {
                 <p onClick={() => handleShowMore(day.day)}>
                     {showIngredients[day.day] ? 'show less...' : 'show more...'}
                 </p>
-                <button><svg stroke="#6684BE" fill="#6684BE" strokeWidth="1" viewBox="0 0 1024 1024" height="2em" width="2em" xmlns="http://www.w3.org/2000/svg"><path d="M685.4 354.8c0-4.4-3.6-8-8-8l-66 .3L512 465.6l-99.3-118.4-66.1-.3c-4.4 0-8 3.5-8 8 0 1.9.7 3.7 1.9 5.2l130.1 155L340.5 670a8.32 8.32 0 0 0-1.9 5.2c0 4.4 3.6 8 8 8l66.1-.3L512 564.4l99.3 118.4 66 .3c4.4 0 8-3.5 8-8 0-1.9-.7-3.7-1.9-5.2L553.5 515l130.1-155c1.2-1.4 1.8-3.3 1.8-5.2z"></path><path d="M512 65C264.6 65 64 265.6 64 513s200.6 448 448 448 448-200.6 448-448S759.4 65 512 65zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg></button>
+                <button onClick={() => handleRemove()}><svg stroke="#6684BE" fill="#6684BE" strokeWidth="1" viewBox="0 0 1024 1024" height="2em" width="2em" xmlns="http://www.w3.org/2000/svg"><path d="M685.4 354.8c0-4.4-3.6-8-8-8l-66 .3L512 465.6l-99.3-118.4-66.1-.3c-4.4 0-8 3.5-8 8 0 1.9.7 3.7 1.9 5.2l130.1 155L340.5 670a8.32 8.32 0 0 0-1.9 5.2c0 4.4 3.6 8 8 8l66.1-.3L512 564.4l99.3 118.4 66 .3c4.4 0 8-3.5 8-8 0-1.9-.7-3.7-1.9-5.2L553.5 515l130.1-155c1.2-1.4 1.8-3.3 1.8-5.2z"></path><path d="M512 65C264.6 65 64 265.6 64 513s200.6 448 448 448 448-200.6 448-448S759.4 65 512 65zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg></button>
                 {showIngredients[day.day] && (
                     <div>
                         {day.ingredients.split('|').map((item, index) => {
@@ -155,6 +158,7 @@ export const ShoppingList = () => {
                     </div>
 
                     <div className="shopping-list">
+                        <h2>To get..</h2>
                         {combinedIngredients ? (
                             <p>{combinedIngredients}</p>
                         ) : (

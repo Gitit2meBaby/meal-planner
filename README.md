@@ -1,12 +1,7 @@
-# React + Vite
+# Meal planner App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+using the API from ninjaAPI to fetch recipes this app is designed to take the decision fatigue out of choosing meals and create a shopping list for the user.
 
-Currently, two official plugins are available:
+Would be nice to sign in and see the recipes for the week and add some calender type environment wherein the user can plan more than a week ahead.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-
-calorieNinjas API
-5Vzv7A+EONJ8disrlftlOQ==YPivZTQa3VS7Dxqt
+Notifications would be nice, and linking to a Todo App like scenario could be great for the user when they are at the supermarket. Link this back to the app and tick off bought items would be sweet.

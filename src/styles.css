@@ -16,7 +16,7 @@ body {
   flex-direction: column;
 }
 
-.search-input, .header-fields #randomBtn, .header-fields, aside li {
+.search-input, .header-fields #randomBtn, .header-fields, .user, aside li {
   display: flex;
   align-items: center;
 }
@@ -34,7 +34,7 @@ body {
 }
 
 .shopping-list,
-.chosen-list, .shopping-list-title, .choose, .instructions, input[type=range]::-webkit-slider-thumb, input[type=range], .ingredients, .matches, .search-input {
+.chosen-list, .shopping-list-title, .choices-complete-modal, .choose, .instructions, input[type=range]::-webkit-slider-thumb, input[type=range], .ingredients, .matches, .search-input, .user img {
   border: 2px solid rgb(16, 2, 2);
   border-radius: 2rem;
 }
@@ -80,6 +80,21 @@ aside li svg path {
 }
 aside li:hover {
   color: #DB737E;
+}
+
+.user {
+  gap: 2rem;
+}
+.user img {
+  max-width: 50px;
+  max-height: 50px;
+}
+.user button {
+  border: none;
+  background-color: #DB737E;
+  border-radius: 2rem;
+  color: #eeeeee;
+  padding: 0.5rem 1rem;
 }
 
 .header-fields {
@@ -175,6 +190,11 @@ h2 {
   background-color: #DB737E;
 }
 
+.selected-btn {
+  background-color: #DB737E !important;
+  color: #eeeeee !important;
+}
+
 .ingredients {
   padding: 1rem;
   background-color: #6684BE;
@@ -260,6 +280,29 @@ input[type=range]:active::-webkit-slider-thumb {
   padding-top: 1rem;
 }
 
+.choices-complete-modal {
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  transform: translate(-50% -50%);
+  background-color: white;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 0 1000px 1000px rgba(0, 0, 0, 0.8);
+}
+.choices-complete-modal button {
+  border: none;
+  background-color: #6684BE;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  color: #eeeeee;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.choices-complete-modal button:hover {
+  background-color: #DB737E;
+}
+
 .shopping-list-page {
   display: grid;
   grid-template-columns: 40% 1fr;
@@ -305,6 +348,7 @@ input[type=range]:active::-webkit-slider-thumb {
   padding: 1.5rem 1rem;
   max-height: 80dvh;
   overflow-y: scroll;
+  white-space: pre-line;
 }
 
 .chosen-list h2:first-of-type {

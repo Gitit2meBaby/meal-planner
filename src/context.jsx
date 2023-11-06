@@ -6,6 +6,7 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
     const [searchKeyword, setSearchKeyword] = useState('')
     const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState('')
     const [recipe, setRecipe] = useState('')
     const [monday, setMonday] = useState('')
     const [tuesday, setTuesday] = useState('')
@@ -81,7 +82,8 @@ const AppProvider = ({ children }) => {
             thursday, setThursday,
             friday, setFriday,
             saturday, setSaturday,
-            sunday, setSunday
+            sunday, setSunday,
+            user, setUser
         }}>
             {children}
         </AppContext.Provider>

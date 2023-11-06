@@ -1,15 +1,17 @@
 import { useGlobalContext } from '../context';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Dashboard = () => {
-    const { recipe, loading, setMonday, setTuesday,
+    const { recipe, loading, setMonday, monday, setTuesday,
         setWednesday, setThursday, setFriday, setSaturday, setSunday } = useGlobalContext();
     const [selectedRecipeId, setSelectedRecipeId] = useState(0);
     const [selectedRecipeIngredients, setSelectedRecipeIngredients] = useState("1 Dozen hard boiled eggs; shelled and cut into half|1/4 c Mayonnaise|1/2 lb Lump crab meat; shelled and picked for cartilage|1 ts Minced garlic|1 tb Minced capers|2 tb Caper juice|Salt|Freshly ground white pepper|1 tb Finely chopped fresh parsley leaves"
     );
     const [selectedRecipeServings, setSelectedRecipeServings] = useState(1);
+    const [choicesComplete, setChoicesComplete] = useState(false)
 
-
+    // change the value displayed depending on the slider value
     const handleSliderChange = (e) => {
         const servingsValue = e.target.value;
         setSelectedRecipeServings(servingsValue);
@@ -43,41 +45,46 @@ export const Dashboard = () => {
         : null;
 
     // Set Chosen Meal to the correct day
-    const handleDayChoice = (day) => {
-        const mealDetails = {
-            recipeId: selectedRecipeId,
-            ingredients: selectedRecipeIngredients,
-            title: selectedRecipe.title,
-            servings: selectedRecipeServings,
+    const handleDayChoice = (e, day) => {
+        //     e.target.classList.toggle('selected-btn');
+
+        // Create a map that associates day names with their corresponding state setters
+        const dayStateSetters = {
+            'monday': setMonday,
+            'tuesday': setTuesday,
+            'wednesday': setWednesday,
+            'thursday': setThursday,
+            'friday': setFriday,
+            'saturday': setSaturday,
+            'sunday': setSunday,
         };
 
-        // Update the state with the chosen meal for the selected day
-        switch (day) {
-            case 'monday':
-                setMonday(mealDetails);
-                break;
-            case 'tuesday':
-                setTuesday(mealDetails);
-                break;
-            case 'wednesday':
-                setWednesday(mealDetails);
-                break;
-            case 'thursday':
-                setThursday(mealDetails);
-                break;
-            case 'friday':
-                setFriday(mealDetails);
-                break;
-            case 'saturday':
-                setSaturday(mealDetails);
-                break;
-            case 'sunday':
-                setSunday(mealDetails);
-                break;
-            default:
-                break;
+        const stateSetter = dayStateSetters[day];
+
+        if (stateSetter) {
+            const mealDetails = {
+                recipeId: selectedRecipeId,
+                ingredients: selectedRecipeIngredients,
+                title: selectedRecipe.title,
+                servings: selectedRecipeServings,
+            };
+
+            if (e.target.classList.contains('selected-btn')) {
+                stateSetter(mealDetails);
+            } else {
+                stateSetter(''); // Reset the state if the button is unselected
+                console.log(monday)
+            }
         }
-        console.log(mealDetails)
+
+        const selectedButtons = document.querySelectorAll('.selected-btn');
+        const selectedButtonsCount = selectedButtons.length;
+
+        if (selectedButtonsCount === 6) {
+            setChoicesComplete(true);
+        } else {
+            setChoicesComplete(false);
+        }
     };
 
     return (
@@ -91,7 +98,9 @@ export const Dashboard = () => {
                 {recipe.map((item, index) => (
                     <div className="recipe-titles" key={index}>
                         <h3>{item.title}</h3>
-                        <button onClick={() => handleTitleClick(index, item.ingredients, item.title)}>Select</button>
+                        <button onClick={() => handleTitleClick(index, item.ingredients, item.title)}
+                            className={selectedRecipeId === index ? 'selected-btn' : ""}
+                        >Select</button>
                     </div>
                 ))}
             </div>
@@ -127,15 +136,26 @@ export const Dashboard = () => {
             <div className="choose">
                 <h2>Choose a day</h2>
                 <div className="btn-grid">
-                    <button onClick={() => handleDayChoice('monday')}>Monday</button>
-                    <button onClick={() => handleDayChoice('tuesday')}>Tuesday</button>
-                    <button onClick={() => handleDayChoice('wednesday')}>Wednesday</button>
-                    <button onClick={() => handleDayChoice('thursday')}>Thursday</button>
-                    <button onClick={() => handleDayChoice('friday')}>Friday</button>
-                    <button onClick={() => handleDayChoice('saturday')}>Saturday</button>
-                    <button onClick={() => handleDayChoice('sunday')}>Sunday</button>
+                    <button onClick={(e) => handleDayChoice(e, 'monday')}
+                        className={(!monday === '') ? 'selected-btn' : ''}
+                    >Monday</button>
+                    <button onClick={(e) => handleDayChoice(e, 'tuesday')}>Tuesday</button>
+                    <button onClick={(e) => handleDayChoice(e, 'wednesday')}>Wednesday</button>
+                    <button onClick={(e) => handleDayChoice(e, 'thursday')}>Thursday</button>
+                    <button onClick={(e) => handleDayChoice(e, 'friday')}>Friday</button>
+                    <button onClick={(e) => handleDayChoice(e, 'saturday')}>Saturday</button>
+                    <button onClick={(e) => handleDayChoice(e, 'sunday')}>Sunday</button>
                 </div>
             </div>
+
+            {choicesComplete &&
+                <div className="choices-complete-modal">
+                    <h3>Thats the week complete!</h3>
+                    <p>Would you like to see your shopping list now?</p>
+                    <Link to='/shopping-list'><button onClick={() => setChoicesComplete(false)}>See List</button></Link>
+                    <button onClick={() => setChoicesComplete(false)}>Change Selection</button>
+                </div>
+            }
         </section>
     );
 };

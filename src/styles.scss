@@ -105,6 +105,25 @@ header {
     @extend %between;
 }
 
+.user {
+    @extend %aligned;
+    gap: 2rem;
+
+    img {
+        max-width: 50px;
+        max-height: 50px;
+        @extend %border;
+    }
+
+    button {
+        border: none;
+        background-color: $red;
+        border-radius: 2rem;
+        color: $off-white;
+        padding: 0.5rem 1rem;
+    }
+}
+
 .header-fields {
     @extend %aligned;
     gap: 1rem;
@@ -219,6 +238,11 @@ h2 {
     @extend %between;
 }
 
+.selected-btn {
+    background-color: $red !important;
+    color: $off-white !important;
+}
+
 //INGREDIENTS CONTAINER
 .ingredients {
     @extend %border;
@@ -320,6 +344,33 @@ input[type="range"]:active::-webkit-slider-thumb {
     }
 }
 
+// CHOICES COMPLETE MODAL
+.choices-complete-modal {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    transform: translate(-50% -50%);
+    background-color: white;
+    @extend %border;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 0 1000px 1000px rgba(0, 0, 0, .8);
+
+    button {
+        border: none;
+        background-color: $blue;
+        border-radius: 1rem;
+        padding: .5rem 1rem;
+        color: $off-white;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: $red;
+    }
+}
+
 //
 // SHOPPING LIST PAGE
 //
@@ -376,6 +427,7 @@ input[type="range"]:active::-webkit-slider-thumb {
     padding: 1.5rem 1rem;
     max-height: 80dvh;
     overflow-y: scroll;
+    white-space: pre-line
 }
 
 .chosen-list {
